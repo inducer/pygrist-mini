@@ -96,6 +96,20 @@ class GristClient:
                 json=json_body)
         return [rec["id"] for rec in ids_json["records"]]
 
+    def sql(
+            self, query: str, args: Optional[Dict[str, Any]] = None,
+            timeout: Optional[float] = None) -> Sequence[Dict[str, Any]]:
+
+        json_body: Dict[str, Any] = {"sql": query}
+        if args is not None:
+            json_body["args"] = args
+        if timeout is not None:
+            json_body["timeout"] = args
+        return [rec["fields"]
+                for rec in self._post_json(
+                    f"/docs/{self.doc_id}/sql",
+                    json=json_body)["records"]]
+
 # }}}
 
 # vim: foldmethod=marker
