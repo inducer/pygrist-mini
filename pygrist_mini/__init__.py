@@ -1,5 +1,5 @@
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 import json
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
 
 import requests
 
