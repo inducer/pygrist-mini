@@ -18,7 +18,7 @@ jobs:
                 python-version: '3.x'
         -   name: "Main Script"
             run: |
-                pip install flake8 flake8-quotes flake8-bugbear
+                pip install flake8 flake8-quotes flake8-bugbear flake8-isort
                 flake8 pygrist_mini
 
 # vim: sw=4
