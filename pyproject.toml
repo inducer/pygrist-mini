@@ -1,0 +1,27 @@
+[build-system]
+requires = [
+  "setuptools >= 40.9.0",
+  "wheel",
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pygrist_mini"
+version = "2023.1"
+authors = [
+    {name = "Andreas Kloeckner", email = "inform@tiker.net"},
+]
+description = "Minimal Grist API (document) client"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+dependencies = [
+    "requests ~=2.31",
+]
