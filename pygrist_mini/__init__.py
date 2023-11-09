@@ -70,6 +70,9 @@ class GristClient:
     def patch_records(self, table_id: str | int,
                       data: List[Tuple[int, Dict[str, Any]]],
                       noparse: bool = False) -> None:
+        if not data:
+            return None
+
         json_body = {
                 "records": [
                     {"id": row_id, "fields": fields}
@@ -85,6 +88,8 @@ class GristClient:
     def add_records(
             self, table_id: str | int, data: List[Dict[str, Any]],
             noparse: bool = False) -> Sequence[int]:
+        if not data:
+            return []
 
         json_body = {
                 "records": [{"fields": fields} for fields in data]
