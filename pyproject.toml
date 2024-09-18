@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pygrist_mini"
-version = "2023.2.1"
+version = "2024.1"
 authors = [
     {name = "Andreas Kloeckner", email = "inform@tiker.net"},
 ]
