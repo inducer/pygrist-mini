@@ -10,9 +10,6 @@ class HTTPError(RuntimeError):
 
 # {{{ grist client
 
-_not_specified = object()
-
-
 class GristClient:
     """Grist API client"""
 
