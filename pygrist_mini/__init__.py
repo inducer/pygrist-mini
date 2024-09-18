@@ -98,6 +98,11 @@ class GristClient:
                 json=json_body)
         return [rec["id"] for rec in ids_json["records"]]
 
+    def delete_records(self, table_id: str | int,  ids: Sequence[int]) -> None:
+        self._post_json(
+                f"/docs/{self.doc_id}/tables/{table_id}/data/delete",
+                json=list(ids))
+
     def sql(
             self, query: str, args: Optional[Dict[str, Any]] = None,
             timeout: Optional[float] = None) -> Sequence[Dict[str, Any]]:
