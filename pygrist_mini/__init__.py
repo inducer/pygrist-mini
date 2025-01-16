@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import json
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple, TypedDict
+from typing import Any, Mapping, Sequence, TypedDict
 
 import requests
 
@@ -30,7 +32,7 @@ class GristClient:
     # {{{ generic request methods
 
     def _request(self,
-                 method, path, query_params: Optional[Mapping[str, str]] = None,
+                 method, path, query_params: Mapping[str, str] | None = None,
                  json: Any = None,
                  ) -> requests.Response:
         headers = {
@@ -39,7 +41,7 @@ class GristClient:
         }
 
         response = requests.request(
-                method, self.root_url + "/api" + path,  params=query_params,
+                method, self.root_url + "/api" + path, params=query_params,
                 headers=headers, json=json)
         if not response.ok:
             raise HTTPError(response.status_code, response.text)
@@ -47,21 +49,21 @@ class GristClient:
         return response
 
     def _get_json(self, path: str,
-                  query_params: Optional[Mapping[str, str]] = None) -> Any:
+                  query_params: Mapping[str, str] | None = None) -> Any:
         return self._request("GET", path, query_params).json()
 
     def _patch_json(self, path, json: Any,
-                    query_params: Optional[Mapping[str, str]] = None) -> Any:
+                    query_params: Mapping[str, str] | None = None) -> Any:
         return self._request("PATCH", path, query_params, json=json).json()
 
     def _post_json(self, path, json: Any,
-                    query_params: Optional[Mapping[str, str]] = None) -> Any:
+                    query_params: Mapping[str, str] | None = None) -> Any:
         return self._request("POST", path, query_params, json=json).json()
 
     # }}}
 
     def get_records(self, table_id: str | int,
-                    filter: Optional[Mapping[str, List[Any]]] = None
+                    filter: Mapping[str, list[Any]] | None = None
                     ) -> Sequence[Record]:
         query_params = {}
 
@@ -73,7 +75,7 @@ class GristClient:
                 query_params=query_params)["records"]
 
     def patch_records(self, table_id: str | int,
-                      data: List[Tuple[int, Dict[str, Any]]],
+                      data: list[tuple[int, dict[str, Any]]],
                       noparse: bool = False) -> None:
         if not data:
             return None
@@ -91,7 +93,7 @@ class GristClient:
                 json=json_body)
 
     def add_records(
-            self, table_id: str | int, data: List[Dict[str, Any]],
+            self, table_id: str | int, data: list[dict[str, Any]],
             noparse: bool = False) -> Sequence[int]:
         if not data:
             return []
@@ -106,16 +108,16 @@ class GristClient:
                 json=json_body)
         return [rec["id"] for rec in ids_json["records"]]
 
-    def delete_records(self, table_id: str | int,  ids: Sequence[int]) -> None:
+    def delete_records(self, table_id: str | int, ids: Sequence[int]) -> None:
         self._post_json(
                 f"/docs/{self.doc_id}/tables/{table_id}/data/delete",
                 json=list(ids))
 
     def sql(
-            self, query: str, args: Optional[Dict[str, Any]] = None,
-            timeout: Optional[float] = None) -> Sequence[Dict[str, Any]]:
+            self, query: str, args: dict[str, Any] | None = None,
+            timeout: float | None = None) -> Sequence[dict[str, Any]]:
 
-        json_body: Dict[str, Any] = {"sql": query}
+        json_body: dict[str, Any] = {"sql": query}
         if args is not None:
             json_body["args"] = args
         if timeout is not None:
