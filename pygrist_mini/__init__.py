@@ -5,7 +5,10 @@ import requests
 
 
 class HTTPError(RuntimeError):
-    pass
+    def __init__(self, status_code: int, message: str):
+        super().__init__(f"Status {status_code}: {message}")
+        self.status_code = status_code
+        self.message = message
 
 
 class Record(TypedDict):
@@ -39,7 +42,7 @@ class GristClient:
                 method, self.root_url + "/api" + path,  params=query_params,
                 headers=headers, json=json)
         if not response.ok:
-            raise HTTPError(f"Status {response.status_code}: {response.text}")
+            raise HTTPError(response.status_code, response.text)
 
         return response
 
