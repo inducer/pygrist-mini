@@ -1,11 +1,16 @@
 import json
-from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Sequence, Tuple, TypedDict
 
 import requests
 
 
 class HTTPError(RuntimeError):
     pass
+
+
+class Record(TypedDict):
+    id: int
+    fields: Mapping[str, Any]
 
 
 # {{{ grist client
@@ -54,7 +59,7 @@ class GristClient:
 
     def get_records(self, table_id: str | int,
                     filter: Optional[Mapping[str, List[Any]]] = None
-                    ) -> Sequence[Mapping]:
+                    ) -> Sequence[Record]:
         query_params = {}
 
         if filter:
