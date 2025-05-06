@@ -63,8 +63,5 @@ multiline-quotes = "double"
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
-known-local-folder = [
-    "pytools",
-]
 lines-after-imports = 2
 required-imports = ["from __future__ import annotations"]
