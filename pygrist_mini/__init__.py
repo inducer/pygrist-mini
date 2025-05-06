@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+import datetime
 import json
 from typing import Any, Mapping, Sequence, TypedDict
 
 import requests
+from zoneinfo import ZoneInfo
+
+
+UTC  = ZoneInfo("UTC")
 
 
 class HTTPError(RuntimeError):
@@ -16,6 +21,10 @@ class HTTPError(RuntimeError):
 class Record(TypedDict):
     id: int
     fields: Mapping[str, Any]
+
+
+def timestamp_to_date(tstamp: float) -> datetime.date:
+    return datetime.datetime.fromtimestamp(tstamp, tz=UTC).date()
 
 
 # {{{ grist client
