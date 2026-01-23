@@ -123,14 +123,14 @@ class GristClient:
                 json=list(ids))
 
     def sql(
-            self, query: str, args: dict[str, Any] | None = None,
-            timeout: float | None = None) -> Sequence[dict[str, Any]]:
+            self, query: str, args: Sequence[object] | None = None,
+            timeout: float | None = None) -> Sequence[dict[str, object]]:
 
-        json_body: dict[str, Any] = {"sql": query}
+        json_body: dict[str, object] = {"sql": query}
         if args is not None:
             json_body["args"] = args
         if timeout is not None:
-            json_body["timeout"] = args
+            json_body["timeout"] = timeout
         return [rec["fields"]
                 for rec in self._post_json(
                     f"/docs/{self.doc_id}/sql",
