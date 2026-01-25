@@ -34,14 +34,13 @@ def timestamp_to_date(tstamp: float) -> datetime.date:
 
 # {{{ grist client
 
+@dataclass(frozen=True)
 class GristClient:
     """Grist API client"""
-
-    def __init__(self, root_url, api_key, doc_id, timeout=None):
-        self.root_url = root_url
-        self.api_key = api_key
-        self.doc_id = doc_id
-        self.timeout = timeout
+    root_url: str
+    api_key: str
+    doc_id: str
+    timeout: float | None = None
 
     # {{{ generic request methods
 
