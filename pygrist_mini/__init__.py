@@ -124,7 +124,7 @@ class GristClient:
 
     def sql(
             self, query: str, args: Sequence[object] | None = None,
-            timeout: float | None = None) -> Sequence[dict[str, object]]:
+            timeout: float | None = None) -> Sequence[dict[str, Any]]:
 
         json_body: dict[str, object] = {"sql": query}
         if args is not None:
