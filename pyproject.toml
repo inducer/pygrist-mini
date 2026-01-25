@@ -66,3 +66,11 @@ multiline-quotes = "double"
 combine-as-imports = true
 lines-after-imports = 2
 required-imports = ["from __future__ import annotations"]
+
+[tool.basedpyright]
+reportImplicitStringConcatenation = "none"
+reportUnnecessaryIsInstance = "none"
+reportUnusedCallResult = "none"
+reportExplicitAny = "none"
+reportUnreachable = "hint"
+reportAny = "none"

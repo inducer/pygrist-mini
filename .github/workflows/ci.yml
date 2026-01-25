@@ -22,4 +22,19 @@ jobs:
                 pipx install ruff
                 ruff check
 
+    basedpyright:
+        runs-on: ubuntu-latest
+        steps:
+        -   uses: actions/checkout@v3
+        -   uses: actions/setup-python@v4
+            with:
+                python-version: '3.x'
+        -   name: "Main Script"
+            run: |
+                python -m venv .testenv
+                source .testenv/bin/activate
+                pip install .
+                pip install basedpyright
+                basedpyright --baselinemode=auto
+
 # vim: sw=4
