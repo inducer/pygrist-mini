@@ -10,7 +10,7 @@ authors = [
 ]
 description = "Minimal Grist API (document) client"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = "MIT"
 classifiers = [
     "Development Status :: 3 - Alpha",

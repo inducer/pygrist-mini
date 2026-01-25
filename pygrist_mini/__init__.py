@@ -2,10 +2,15 @@ from __future__ import annotations
 
 import datetime
 import json
-from typing import Any, Mapping, Sequence, TypedDict
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, TypedDict
+from zoneinfo import ZoneInfo
 
 import requests
-from zoneinfo import ZoneInfo
+
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Sequence
 
 
 UTC  = ZoneInfo("UTC")
@@ -14,8 +19,8 @@ UTC  = ZoneInfo("UTC")
 class HTTPError(RuntimeError):
     def __init__(self, status_code: int, message: str):
         super().__init__(f"Status {status_code}: {message}")
-        self.status_code = status_code
-        self.message = message
+        self.status_code: int = status_code
+        self.message: str = message
 
 
 class Record(TypedDict):
