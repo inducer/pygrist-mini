@@ -49,12 +49,12 @@ extend-select = [
 ]
 extend-ignore = [
     "C90",  # McCabe complexity
-    "E221", # multiple spaces before operator
-    "E226", # missing whitespace around arithmetic operator
-    "E402", # module-level import not at top of file
-    "UP031", # use f-strings instead of %
-    "UP032", # use f-strings instead of .format
-    "RUF067", # no code in __init__ *shrug*
+    "multiple-spaces-before-operator",
+    "missing-whitespace-around-arithmetic-operator",
+    "module-import-not-at-top-of-file",
+    "printf-string-formatting",
+    "f-string",
+    "non-empty-init-module",
 ]
 
 [tool.ruff.lint.flake8-quotes]
